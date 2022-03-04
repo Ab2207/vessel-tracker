@@ -39,15 +39,7 @@ def get_data():
     except ApiErrorException as e:
         print(e)
 
-
-# def select_marker_color(row):
-#     if row['DISTANCE_REMAINING'] > 0:
-#         return 'blue'
-#     return 'red'
-#
-#
-# get_data()['color'] = get_data().apply(select_marker_color, axis=1)
-
+        
 application = Flask(__name__)
 
 
@@ -86,14 +78,13 @@ def plot_map():
 
 if __name__ == "__main__":
     application.run(host='0.0.0.0', port=8080)
-    #serve(app, host='0.0.0.0', port=80)
 
 get_data()
 plot_map()
 
 sch = scheduler()
-sch.add_job(get_data, 'interval', seconds=3600)
-sch.add_job(plot_map, 'interval', seconds=3600)
+sch.add_job(get_data, 'interval', seconds=10800)
+sch.add_job(plot_map, 'interval', seconds=10800)
 sch.start()
 
 try:
